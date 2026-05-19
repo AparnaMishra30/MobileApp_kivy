@@ -26,6 +26,16 @@ jobs:
           autoconf libtool pkg-config \
           zlib1g-dev libncurses5-dev libffi-dev libssl-dev
 
+    - name: Install Android SDK Build-Tools
+      run: |
+        sudo apt-get install -y wget
+        mkdir -p $HOME/android-sdk/cmdline-tools
+        wget https://dl.google.com/android/repository/commandlinetools-linux-10406996_latest.zip
+        unzip commandlinetools-linux-10406996_latest.zip -d $HOME/android-sdk/cmdline-tools
+        yes | $HOME/android-sdk/cmdline-tools/cmdline-tools/bin/sdkmanager --licenses
+        $HOME/android-sdk/cmdline-tools/cmdline-tools/bin/sdkmanager "build-tools;34.0.0"
+        export PATH=$HOME/android-sdk/build-tools/34.0.0:$PATH
+
     - name: Set up Android SDK
       uses: android-actions/setup-android@v3
       with:
