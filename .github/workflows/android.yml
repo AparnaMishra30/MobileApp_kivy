@@ -32,6 +32,10 @@ jobs:
         api-level: 31
         build-tools-version: 33.0.0
 
+    - name: Install Android build-tools
+      run: |
+        sdkmanager "build-tools;33.0.0"
+
     - name: Install Buildozer
       run: |
         pip install --upgrade pip
